@@ -1,0 +1,9 @@
+{
+  "generator-react-webpack": {
+    "appName": "i2x-challenge",
+    "style": "scss",
+    "cssmodules": true,
+    "postcss": true,
+    "generatedWithVersion": 4
+  }
+}
