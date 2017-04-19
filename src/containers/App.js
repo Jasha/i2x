@@ -2,21 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import '../actions/';
 import Main from '../components/App';
 class App extends React.Component {
   render() {
-    const {actions, Plain} = this.props;
-    return <Main actions={actions} Plain={Plain}/>;
+    const {actions, AuthReducer} = this.props;
+    return <div>{this.props.children}</div>;
   }
 }
 App.propTypes = {
   actions: PropTypes.shape({}),
-  Plain: PropTypes.shape({})
+  AuthReducer: PropTypes.shape({})
 };
 function mapStateToProps(state) {
-  // eslint-disable-line no-unused-vars
-  const props = { Plain: state.Plain };
+  const props = {
+    AuthReducer: state.AuthReducer
+  };
   return props;
 }
 function mapDispatchToProps(dispatch) {
