@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { logout } from '../actions/authActions';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 class Main extends React.Component {
   constructor(props) {
@@ -22,6 +23,12 @@ class Main extends React.Component {
       <div>
         <div>
           <Navbar inverse collapseOnSelect>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <Link to={'/recordings'}>i2x</Link>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+            </Navbar.Header>
             <Navbar.Collapse>
               <Nav pullRight>
                 <NavItem onClick={this.handleLogoutAction}>Logout</NavItem>

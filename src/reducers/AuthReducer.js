@@ -16,13 +16,14 @@ export default function auth(state = defaultState, action) {
 			
 		case LOGIN_SUCCESS:
 			return Object.assign({}, state, {
+				errorMessage: '',
 				isAuthenticated: true,
 				isLoading: false
 			});
 			
 		case LOGIN_FAILED:
 			return Object.assign({}, state, {
-        errorMessage: action.errorMessage,
+        		errorMessage: action.errorMessage,
 				isAuthenticated: false,
 				isLoading: false
 			});
