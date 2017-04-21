@@ -2,6 +2,7 @@ import { GET_ALL_RECORDINGS_SUCCESS, GET_ALL_RECORDINGS_FAIL } from '../constant
 import { browserHistory } from 'react-router';
 import fetch from 'isomorphic-fetch';
 import config from 'config';
+import jwtDecode from 'jwt-decode';
 
 
 export function getAllRecordings() {
