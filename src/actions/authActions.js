@@ -24,12 +24,11 @@ export function login(email, password) {
 				if (response.ok) {
 					response.json()
           .then((response) => {
-							dispatch(loginSuccess());
-							
-							localStorage.setItem('id_token', response.token);
-
-							browserHistory.replace('/recordings');
-						});
+            dispatch(loginSuccess());
+            
+            localStorage.setItem('id_token', response.token);
+            browserHistory.replace('/recordings');
+          });
 				} else {
 					dispatch(loginFailed('Invalid username/password.'));
 				}
@@ -43,7 +42,6 @@ export function login(email, password) {
 export function logout() {
   return (dispatch) => {
     localStorage.removeItem('id_token');
-
     browserHistory.replace('/login');
 
     dispatch(logoutSuccess());
