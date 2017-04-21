@@ -1,4 +1,5 @@
 import { GET_ALL_RECORDINGS_SUCCESS, GET_ALL_RECORDINGS_FAIL } from '../constants/actionTypes.js';
+import { browserHistory } from 'react-router';
 import fetch from 'isomorphic-fetch';
 import config from 'config';
 
@@ -6,6 +7,19 @@ import config from 'config';
 export function getAllRecordings() {
   return (dispatch) => {
 		//dispatch(startLoading());
+
+    let token = localStorage.getItem('id_token');
+
+    if (!token) {
+      browserHistory.replace('/login');
+    } else {
+      let tokenData = jwtDecode(token);
+
+      if ((Date.now() / 1000) > tokenData.exp) {
+        localStorage.removeItem('id_token');
+        browserHistory.replace('/login');
+      }
+    }
 
 		let fetchConfig = {
       method: 'GET',
