@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Rating from 'react-rating';
-import './recordingitem.css';
+import '../styles/recording-item.css';
 
 const starEmptyImage = require('images/star-empty.png');
 const starFullImage = require('images/star-full.png');

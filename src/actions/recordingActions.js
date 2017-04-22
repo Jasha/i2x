@@ -1,35 +1,19 @@
-import { GET_ALL_RECORDINGS_SUCCESS, GET_ALL_RECORDINGS_FAIL } from '../constants/actionTypes.js';
+import { RECORDING_ACTION_START, GET_ALL_RECORDINGS_SUCCESS, GET_ALL_RECORDINGS_FAIL } from '../constants/actionTypes.js';
 import { browserHistory } from 'react-router';
 import fetch from 'isomorphic-fetch';
 import config from 'config';
-import jwtDecode from 'jwt-decode';
-
+import { getFetchConfig } from './fetchConfigHelper';
+import { isValidToken } from '../utils/helper';
 
 export function getAllRecordings() {
   return (dispatch) => {
-		//dispatch(startLoading());
+		dispatch(startLoading());
 
-    let token = localStorage.getItem('id_token');
-
-    if (!token) {
+    if (!isValidToken()) {
       browserHistory.replace('/login');
-    } else {
-      let tokenData = jwtDecode(token);
-
-      if ((Date.now() / 1000) > tokenData.exp) {
-        localStorage.removeItem('id_token');
-        browserHistory.replace('/login');
-      }
     }
 
-		let fetchConfig = {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'JWT ' + localStorage.getItem('id_token')
-      }
-    }
+		let fetchConfig = getFetchConfig('GET', true);
 
 		return fetch(config.apiUrl + 'ai/recording/list/', fetchConfig)
 			.then((response) => {
@@ -46,6 +30,13 @@ export function getAllRecordings() {
 				dispatch(getAllRecordingsFailed());
 			});
 	}
+}
+
+function startLoading() {
+  return {
+    type: RECORDING_ACTION_START,
+    isLoading: true
+  }
 }
 
 function getAllRecordingsSuccess(response) {

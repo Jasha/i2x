@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllRecordings } from '../actions/recordingActions';
 import { PageHeader, ListGroup } from 'react-bootstrap';
+import Loader from '../components/Loader';
 import RecordingItem from '../components/RecordingItem';
 
 class Recordings extends React.Component {
@@ -31,9 +32,11 @@ class Recordings extends React.Component {
     return (
       <div className="container">
         <PageHeader>Recordings</PageHeader>
-        <ListGroup componentClass="ul">
-          { recordingItems }
-        </ListGroup>
+        <Loader loaded={!this.props.isLoading}>
+          <ListGroup componentClass="ul">
+            { recordingItems }
+          </ListGroup>
+        </Loader>
       </div>
     );
   }
@@ -43,7 +46,10 @@ Recordings.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const props = { recordings: state.RecordingReducer.recordings };
+  const props = {
+    isLoading: state.RecordingReducer.isLoading,
+    recordings: state.RecordingReducer.recordings
+  };
   return props;
 }
 

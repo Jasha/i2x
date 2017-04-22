@@ -2,22 +2,13 @@ import { AUTH_ACTION_START, LOGIN_FAILED, LOGIN_SUCCESS, LOGOUT_SUCCESS } from '
 import { browserHistory } from 'react-router';
 import fetch from 'isomorphic-fetch';
 import config from 'config';
+import { getFetchConfig } from './fetchConfigHelper';
 
 export function login(email, password) {
   return (dispatch) => {
 		dispatch(startLoading());
 
-		let fetchConfig = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'email': email,
-        'password': password
-      })
-    }
+		let fetchConfig = getFetchConfig('POST', false, JSON.stringify({ 'email': email, 'password': password }));
 
 		return fetch(config.apiUrl + 'core/login/', fetchConfig)
 			.then((response) => {
@@ -27,7 +18,7 @@ export function login(email, password) {
             dispatch(loginSuccess());
             
             localStorage.setItem('id_token', response.token);
-            browserHistory.replace('/recordings');
+            browserHistory.replace('/');
           });
 				} else {
 					dispatch(loginFailed('Invalid username/password.'));

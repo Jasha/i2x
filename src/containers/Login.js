@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { login } from '../actions/authActions';
 import { Grid, Col, Row } from 'react-bootstrap';
 import LoginForm from '../components/LoginForm';
 import Loader from '../components/Loader';
+import { isValidToken } from '../utils/helper';
 
 const i2xLogo = require('../images/i2xLogo.png');
 
@@ -13,6 +15,12 @@ class Login extends React.Component {
     super(props);
 
     this.submitLoginForm = this.submitLoginForm.bind(this);
+  }
+
+  componentWillMount() {
+    if (isValidToken()) {
+      browserHistory.replace('/');
+    }
   }
 
   submitLoginForm(email, password) {

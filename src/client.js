@@ -9,33 +9,13 @@ import Main from './containers/Main';
 import Recordings from './containers/Recordings';
 import ErrorPage from './containers/ErrorPage';
 import configureStore from './stores';
-import jwtDecode from 'jwt-decode';
+import { isValidToken } from './utils/helper';
 
 const store = configureStore();
 
 function requireAuth(nextState, replace) {
-  let token = localStorage.getItem('id_token');
-
-  if (!token) {
+  if (!isValidToken()) {
     replace('/login');
-  } else {
-    let tokenData = jwtDecode(token);
-
-    if ((Date.now() / 1000) > tokenData.exp) {
-      replace('/login');
-    }
-  }
-}
-
-function checkIfLoggedIn(nextState, replace) {
-  let token = localStorage.getItem('id_token');
-
-  if (token) {
-    let tokenData = jwtDecode(token);
-
-    if ((Date.now() / 1000) < tokenData.exp) {
-      replace('/recordings');
-    }
   }
 }
 
@@ -43,13 +23,11 @@ ReactDOM.render(
   <AppContainer>
     <Provider store={store}>
       <Router history={browserHistory}>
-          <Route path="/" component={App}>
-            <Route path="/login" component={Login} onEnter={checkIfLoggedIn} />
-            <Route component={Main} onEnter={requireAuth}>
-              <Route path="/recordings" component={Recordings} />
-            </Route>
-          </Route>
+        <Route path="/login" component={Login} />
+        <Route component={Main} onEnter={requireAuth}>
+          <Route path="/" component={Recordings} />
           <Route path="*" component={ErrorPage} />
+        </Route>
       </Router>
     </Provider>
   </AppContainer>,

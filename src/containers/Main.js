@@ -25,7 +25,7 @@ class Main extends React.Component {
           <Navbar inverse collapseOnSelect>
             <Navbar.Header>
               <Navbar.Brand>
-                <Link to={'/recordings'}>i2x Challenge</Link>
+                <Link to={'/'}>i2x Challenge</Link>
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
