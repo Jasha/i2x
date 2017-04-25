@@ -1,19 +1,19 @@
-export function getFetchConfig(method, includeToken, data) {
-    let fetchConfig = {
-      method: method,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    };
-
-    if (includeToken) {
-      fetchConfig.headers['Authorization'] = 'JWT ' + localStorage.getItem('id_token')
+export default function getFetchConfig(method, includeToken, data) {
+  const fetchConfig = {
+    method,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
     }
+  };
 
-    if (data) {
-      fetchConfig.body = data;
-    }
+  if (includeToken) {
+    fetchConfig.headers.Authorization = `JWT ${localStorage.getItem('id_token')}`;
+  }
 
-    return fetchConfig;
+  if (data) {
+    fetchConfig.body = data;
+  }
+
+  return fetchConfig;
 }

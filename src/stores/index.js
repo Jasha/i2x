@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from '../reducers';
-import config from 'config';
 
 function reduxStore(initialState) {
   const middlewares = [];
   middlewares.push(thunk);
 
-  const store = createStore(reducers, applyMiddleware(...middlewares), initialState, window.devToolsExtension && window.devToolsExtension());
+  const store = createStore(reducers, applyMiddleware(...middlewares), initialState,
+    window.devToolsExtension && window.devToolsExtension());
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

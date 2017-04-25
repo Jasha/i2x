@@ -1,26 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Loader extends React.Component {
-	render() {
+  render() {
     const overlayClass = 'loader__overlay';
     const overlayClassModifier = overlayClass + (this.props.loaded ? '--hidden' : '--active');
-		
-		return (
-			<div>
-				{ this.props.children }
-				
-				<div className={overlayClass + ' ' + overlayClassModifier}></div>
-			</div>
-			);
-	}
+
+    return (
+      <div>
+        { this.props.children }
+
+        <div className={`${overlayClass} ${overlayClassModifier}`} />
+      </div>
+    );
+  }
 }
 
 Loader.propTypes = {
-	loaded: React.PropTypes.bool
+  loaded: PropTypes.bool,
+  children: PropTypes.node
 };
 
 Loader.defaultProps = {
-	loaded: true
+  loaded: true
 };
 
 export default Loader;

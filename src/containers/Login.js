@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { login } from '../actions/authActions';
 import { Grid, Col, Row } from 'react-bootstrap';
+import { login } from '../actions/authActions';
 import LoginForm from '../components/LoginForm';
 import Loader from '../components/Loader';
-import { isValidToken } from '../utils/helper';
+import isValidToken from '../utils/helper';
 
 const i2xLogo = require('../images/i2xLogo.png');
 
@@ -42,7 +42,10 @@ class Login extends React.Component {
               <h3>Amar Jasarevic</h3>
             </Col>
             <Col md={6} sm={8}>
-              <LoginForm errorMessage={this.props.errorMessage} submitAction={this.submitLoginForm} />
+              <LoginForm
+                errorMessage={this.props.errorMessage}
+                submitAction={this.submitLoginForm}
+                />
             </Col>
           </Row>
         </Loader>
@@ -51,10 +54,14 @@ class Login extends React.Component {
   }
 }
 
-Login.propTypes = { };
+Login.propTypes = {
+  dispatch: PropTypes.func,
+  isLoading: PropTypes.bool,
+  errorMessage: PropTypes.string
+};
 
 function mapStateToProps(state) {
-  const props = { 
+  const props = {
     errorMessage: state.AuthReducer.errorMessage,
     isLoading: state.AuthReducer.isLoading
   };

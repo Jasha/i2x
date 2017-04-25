@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { logout } from '../actions/authActions';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router';
+import { logout } from '../actions/authActions';
 
 class Main extends React.Component {
   constructor(props) {
@@ -18,7 +17,6 @@ class Main extends React.Component {
   }
 
   render() {
-    const { actions } = this.props;
     return (
       <div>
         <div>
@@ -44,6 +42,9 @@ class Main extends React.Component {
   }
 }
 
-Main.propTypes = {};
+Main.propTypes = {
+  dispatch: PropTypes.func,
+  children: PropTypes.node
+};
 
 export default connect()(Main);

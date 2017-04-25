@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, FormGroup, FormControl, Col, Button, Checkbox, ControlLabel, Alert } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, Col, Button, ControlLabel, Alert } from 'react-bootstrap';
 
 class LoginForm extends React.Component {
+  static validateEmail(value) {
+    const emailRegex = /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return emailRegex.test(value);
+  }
+
   constructor(props) {
     super(props);
 
@@ -19,7 +24,7 @@ class LoginForm extends React.Component {
     this.handleSubmitAction = this.handleSubmitAction.bind(this);
     this.isFormValid = this.isFormValid.bind(this);
   }
-  
+
   changeUsername(event) {
     this.setState({ email: event.target.value });
   }
@@ -42,18 +47,12 @@ class LoginForm extends React.Component {
   }
 
   isFormValid() {
-    const isValidEmail = this.validateEmail(this.state.email);
-    const isValidPassword = this.state.password.length > 0;
-    
-    this.setState({ isValidEmail: isValidEmail });
-    this.setState({ isValidPassword: isValidPassword });
+    const validEmail = LoginForm.validateEmail(this.state.email);
+    const validPassword = this.state.password.length > 0;
 
-    return isValidEmail && isValidPassword;
-  }
+    this.setState({ isValidEmail: validEmail, isValidPassword: validPassword });
 
-  validateEmail(value) {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return emailRegex.test(value);
+    return validEmail && validPassword;
   }
 
   render() {
@@ -65,13 +64,13 @@ class LoginForm extends React.Component {
               { this.props.errorMessage }
             </Alert> : null
           }
-          <FormGroup controlId="formHorizontalEmail" validationState={this.state.isValidEmail ? null : "error"}>
+          <FormGroup controlId="formHorizontalEmail" validationState={this.state.isValidEmail ? null : 'error'}>
             <Col componentClass={ControlLabel} sm={2}>Email</Col>
             <Col sm={10}>
               <FormControl type="email" placeholder="Email" onChange={this.changeUsername} onKeyPress={this.checkIfEnterIsPressed} />
             </Col>
           </FormGroup>
-          <FormGroup controlId="formHorizontalPassword" validationState={this.state.isValidPassword ? null : "error"}>
+          <FormGroup controlId="formHorizontalPassword" validationState={this.state.isValidPassword ? null : 'error'}>
             <Col componentClass={ControlLabel} sm={2}>Password</Col>
             <Col sm={10}>
               <FormControl type="password" placeholder="Password" onChange={this.changePassword} onKeyPress={this.checkIfEnterIsPressed} />

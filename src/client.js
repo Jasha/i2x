@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
-import App from './containers/App';
+import 'normalize.css';
+import './styles/site.css';
 import Login from './containers/Login';
 import Main from './containers/Main';
 import Recordings from './containers/Recordings';
 import ErrorPage from './containers/ErrorPage';
 import configureStore from './stores';
-import { isValidToken } from './utils/helper';
+import isValidToken from './utils/helper';
 
 const store = configureStore();
 

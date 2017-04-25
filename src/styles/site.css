@@ -19,8 +19,13 @@
   transition: max-height 0.5s ease-in-out; }
 
 .recording-item__expand-link {
+  background: none;
+  border: none;
   color: dodgerblue;
   cursor: pointer;
+  display: block;
+  margin: 0 0 0 auto;
+  outline: none;
   padding: 15px 0;
   text-align: right; }
 

@@ -31,21 +31,21 @@ class RecordingItem extends React.Component {
           { this.props.text }
         </div>
         { isLongText ?
-          <div className="recording-item__expand-link" onClick={this.toggleExpanded}>
+          <button type="button" className="recording-item__expand-link" onClick={this.toggleExpanded}>
             { expandLinkMessage }
-          </div> : null
+          </button> : null
         }
         <div className="recording-item__description">
           <div className="recording-item__rating">
             <Rating
+              readonly
               initialRate={this.props.rating}
-              readonly={true}
-              empty={<img src={starEmptyImage} className="recording-item__rating-icon" />}
-              full={<img src={starFullImage} className="recording-item__rating-icon" />}
+              empty={<img src={starEmptyImage} alt="o" className="recording-item__rating-icon" />}
+              full={<img src={starFullImage} alt="O" className="recording-item__rating-icon" />}
               />
           </div>
           <div className="recording-item__duration">
-            { Math.round(this.props.duration / 60) + ' minutes' }
+            { `${Math.round(this.props.duration / 60)} minutes` }
           </div>
           <div className="recording-item__audio">
             <audio controls>
