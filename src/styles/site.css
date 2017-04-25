@@ -1,0 +1,37 @@
+.loader__overlay {
+  position: fixed;
+  z-index: 2147483647;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.1) url("../images/ajax-loader.gif") 50% 50% no-repeat; }
+
+.loader__overlay--hidden {
+  display: none; }
+
+.loader__overlay--active {
+  display: block; }
+
+.recording-item__text {
+  max-height: 140px;
+  overflow-y: hidden;
+  transition: max-height 0.5s ease-in-out; }
+
+.recording-item__expand-link {
+  color: dodgerblue;
+  cursor: pointer;
+  padding: 15px 0;
+  text-align: right; }
+
+.recording-item__description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  .recording-item__description .recording-item__audio {
+    margin-top: -7px; }
+  .recording-item__description .recording-item__rating-icon {
+    height: 20px;
+    width: 20px; }
+
+/*# sourceMappingURL=site.css.map */

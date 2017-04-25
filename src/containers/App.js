@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Main from '../components/App';
 import 'normalize.css';
+import '../styles/site.css';
 class App extends React.Component {
   render() {
     const {actions, AuthReducer, RecordingReducer} = this.props;
