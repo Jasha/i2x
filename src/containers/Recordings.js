@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllRecordings } from '../actions/recordingActions';
-import { PageHeader, ListGroup } from 'react-bootstrap';
+import { PageHeader, ListGroup, Alert } from 'react-bootstrap';
 import Loader from '../components/Loader';
 import RecordingItem from '../components/RecordingItem';
 
@@ -34,7 +34,10 @@ class Recordings extends React.Component {
         <PageHeader>Recordings</PageHeader>
         <Loader loaded={!this.props.isLoading}>
           <ListGroup componentClass="ul">
-            { recordingItems }
+            { recordingItems.length === 0 && !this.props.isLoading ?
+              <Alert bsStyle="warning">No recordings found.</Alert> :
+              recordingItems
+            }
           </ListGroup>
         </Loader>
       </div>
