@@ -7,12 +7,35 @@ const starEmptyImage = require('images/star-empty.png');
 const starFullImage = require('images/star-full.png');
 
 class RecordingItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isTextExpanded: false
+    };
+
+    this.toggleExpanded = this.toggleExpanded.bind(this);
+  }
+
+  toggleExpanded() {
+    this.setState({ isTextExpanded: !this.state.isTextExpanded });
+  }
+
   render() {
+    const MAX_CHARS_NO_EXPANDED = 1000;
+    const isLongText = this.props.text.length > MAX_CHARS_NO_EXPANDED;
+    const expandLinkMessage = this.state.isTextExpanded ? 'Show less' : 'Show more';
+
     return (
       <li className="list-group-item">
-        <div className="recording-item__text">
+        <div className="recording-item__text" style={{ maxHeight: this.state.isTextExpanded ? '1000px' : '', marginBottom: isLongText ? '' : '30px' }}>
           { this.props.text }
         </div>
+        { isLongText ?
+          <div className="recording-item__expand-link" onClick={this.toggleExpanded}>
+            { expandLinkMessage }
+          </div> : null
+        }
         <div className="recording-item__description">
           <div className="recording-item__rating">
             <Rating
