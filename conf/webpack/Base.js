@@ -1,6 +1,8 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const autoprefixer = require('autoprefixer');
+const webpack = require('webpack');
 const npmBase = path.join(__dirname, '../../node_modules');
 class WebpackBaseConfig {
   constructor() {
@@ -154,7 +156,16 @@ class WebpackBaseConfig {
         filename: 'app.js',
         publicPath: './assets/'
       },
-      plugins: [],
+      plugins: [
+        new webpack.LoaderOptionsPlugin({
+          options: {
+            postcss: [
+              require('precss'),
+              require('autoprefixer')()
+            ]
+          }
+        })
+      ],
       resolve: {
         alias: {
           actions: `${ this.srcPathAbsolute }/actions/`,
@@ -173,10 +184,7 @@ class WebpackBaseConfig {
           this.srcPathAbsolute,
           'node_modules'
         ]
-      }/*,
-      postcss: function () {
-        return [];
-      }*/
+      }
     };
   }
 }

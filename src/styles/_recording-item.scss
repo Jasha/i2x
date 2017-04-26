@@ -1,0 +1,32 @@
+.recording-item__text {
+  max-height: 140px;
+  overflow-y: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.recording-item__expand-link {
+  background: none;
+  border: none;
+  color: $blue-color;
+  cursor: pointer;
+  display: block;
+  margin: 0 0 0 auto;
+  outline: none;
+  padding: 15px 0;
+  text-align: right;
+}
+
+.recording-item__description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .recording-item__audio {
+    margin-top: -7px;
+  }
+
+  .recording-item__rating-icon {
+    height: $rating-icon-size;
+    width: $rating-icon-size;
+  }
+}
