@@ -1,1 +1,1 @@
-web: node server.js NODE_ENV=production
+web: webpack-dev-server --open --env dist -p --progress
