@@ -34,6 +34,7 @@ dist/
 
 # IDE/Editor data
 .idea/
+.vscode/
 
 # SASS CACHE
 .sass-cache
