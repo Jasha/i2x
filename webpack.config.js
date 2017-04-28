@@ -2,7 +2,7 @@
 
 /* eslint no-console: "off" */
 const webpackConfigs = require('./conf/webpack');
-const defaultConfig = 'dev';
+const defaultConfig = 'dist';
 
 module.exports = (configName) => {
 
