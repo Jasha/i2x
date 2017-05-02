@@ -1,1 +1,1 @@
-web: webpack-dev-server --open --env dist -p --progress
+web: webpack-dev-server --env dist
